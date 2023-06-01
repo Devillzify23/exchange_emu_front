@@ -1,4 +1,5 @@
 export 'history.dart';
-export 'home.dart';
+export 'login.dart';
+export 'register.dart';
 export 'user_details.dart';
 export 'wallets.dart';

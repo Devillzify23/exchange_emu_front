@@ -5,16 +5,16 @@
 import 'dart:convert';
 
 class User {
-  final int id;
-  final String nombre;
-  final String apellido;
-  final String apodo;
-  final String cuenta;
-  final String contra;
-  final double saldo;
+  final int? id;
+  final String? nombre;
+  final String? apellido;
+  final String? apodo;
+  final String? cuenta;
+  final String? contra;
+  final double? saldo;
 
   User({
-    required this.id,
+    this.id,
     required this.nombre,
     required this.apellido,
     required this.apodo,
@@ -46,4 +46,9 @@ class User {
         "contra": contra,
         "saldo": saldo,
       };
+
+  @override
+  String toString() {
+    return 'User(id: $id, nombre: $nombre, apellido: $apellido, apodo: $apodo, cuenta: $cuenta, contra: $contra, saldo: $saldo)';
+  }
 }
