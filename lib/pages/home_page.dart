@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             width: size.width,
             height: size.height * 0.8,
-            color: Colors.grey,
+            color: Color.fromARGB(255, 0, 0, 0),
             child: SimpleCurrencyList(),
           ),
           Container(
