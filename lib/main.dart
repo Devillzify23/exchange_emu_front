@@ -1,4 +1,6 @@
+import 'package:exchange_emu_front/pages/home_page.dart';
 import 'package:exchange_emu_front/pages/pages.dart';
+import 'package:exchange_emu_front/providers/currencies_provider.dart';
 import 'package:exchange_emu_front/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,9 +11,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Preferences.init();
   runApp(
-    MultiProvider(
-        providers: [ChangeNotifierProvider(create: (_) => UserProvider())],
-        child: const Myapp()),
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => UserProvider()),
+      ChangeNotifierProvider(create: (_) => CurrencyProvider())
+    ], child: const Myapp()),
   );
 }
 
@@ -20,15 +23,24 @@ class Myapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String page = '';
+
+    if (Preferences.logged == true) {
+      page = '/home';
+    } else {
+      page = '/';
+    }
+
     return MaterialApp(
-      initialRoute: '/',
+      initialRoute: page,
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => Login(),
+        '/': (context) => const Login(),
         '/wallets': (context) => const Wallets(),
         '/history': (context) => const History(),
         '/user': (context) => const UserDetails(),
-        '/register': (context) => RegisterPage()
+        '/register': (context) => const RegisterPage(),
+        '/home': (context) => const HomePage()
       },
       theme: ThemeData(
           appBarTheme: AppBarTheme.lerp(

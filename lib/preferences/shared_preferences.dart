@@ -7,7 +7,7 @@ class Preferences {
 
   static String _apodo = "";
 
-  static bool _logged = true;
+  static bool _logged = false;
 
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();

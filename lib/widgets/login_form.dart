@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:exchange_emu_front/pages/pages.dart';
+import 'package:exchange_emu_front/providers/currencies_provider.dart';
 import 'package:exchange_emu_front/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,18 +21,24 @@ class _LoginFormState extends State<LoginForm> {
       _formKey.currentState!.save();
       await userProvider.getUser(_cuenta, _contra);
     }
-    if (userProvider.usuario.id != null) {
-      Preferences.idUser = userProvider.usuario.id!;
-      Preferences.apodo = userProvider.usuario.apodo!;
-      Preferences.logged = true;
-      print("estas son las preferences");
-      print(Preferences.apodo);
-      print(Preferences.idUser);
-      print(Preferences.logged);
+    if (_cuenta != '' && _contra != '') {
+      if (userProvider.usuario.id != null) {
+        Preferences.idUser = userProvider.usuario.id!;
+        Preferences.apodo = userProvider.usuario.apodo!;
+        Preferences.logged = true;
+        print("estas son las preferences");
+        print(Preferences.apodo);
+        print(Preferences.idUser);
+        print(Preferences.logged);
+        Navigator.pushNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text(
+                "No se ha encontrado ningun usuario con esas credenciales")));
+      }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-              "No se ha encontrado ningun usuario con esas credenciales")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Introduce los datos necesarios")));
     }
   }
 
@@ -66,7 +71,7 @@ class _LoginFormState extends State<LoginForm> {
                     }
                     return null;
                   },
-                  onSaved: (value) {
+                  onChanged: (value) {
                     _cuenta = value!;
                   },
                 ),
@@ -92,7 +97,7 @@ class _LoginFormState extends State<LoginForm> {
                     }
                     return null;
                   },
-                  onSaved: (value) {
+                  onChanged: (value) {
                     _contra = value!;
                   },
                   obscureText: true, // Oculta el texto ingresado
@@ -126,7 +131,7 @@ class _LoginFormState extends State<LoginForm> {
                         decoration: const BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.5)),
-                            color: Colors.cyan,
+                            color: Color.fromRGBO(0, 188, 212, 1),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey,
