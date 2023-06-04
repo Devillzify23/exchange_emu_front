@@ -39,6 +39,6 @@ class FullCrypto {
         "symbol": symbol,
         "description": description,
         "max_supply": maxSupply,
-        "pricing": pricing.toMap(),
+        "pricing": pricing!.toMap(),
       };
 }

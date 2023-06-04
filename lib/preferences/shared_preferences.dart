@@ -9,6 +9,10 @@ class Preferences {
 
   static bool _logged = false;
 
+  static String _ip = '192.168.0.187:8080';
+
+  static String _symbol = "";
+
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();
   }
@@ -38,5 +42,23 @@ class Preferences {
   static set apodo(String apodo) {
     _apodo = apodo;
     _prefs.setString('apodo', apodo);
+  }
+
+  static String get ip {
+    return _prefs.getString('ip') ?? _ip;
+  }
+
+  static set ip(String ip) {
+    _ip = ip;
+    _prefs.setString('ip', ip);
+  }
+
+  static String get symbol {
+    return _prefs.getString('symbol') ?? _symbol;
+  }
+
+  static set symbol(String symbol) {
+    _symbol = symbol;
+    _prefs.setString('symbol', symbol);
   }
 }

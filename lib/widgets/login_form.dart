@@ -1,12 +1,13 @@
-import 'package:exchange_emu_front/pages/pages.dart';
-import 'package:exchange_emu_front/providers/currencies_provider.dart';
 import 'package:exchange_emu_front/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _LoginFormState createState() => _LoginFormState();
 }
 
@@ -26,10 +27,6 @@ class _LoginFormState extends State<LoginForm> {
         Preferences.idUser = userProvider.usuario.id!;
         Preferences.apodo = userProvider.usuario.apodo!;
         Preferences.logged = true;
-        print("estas son las preferences");
-        print(Preferences.apodo);
-        print(Preferences.idUser);
-        print(Preferences.logged);
         Navigator.pushNamed(context, '/home');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

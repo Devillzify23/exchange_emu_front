@@ -1,5 +1,11 @@
-import 'package:exchange_emu_front/widgets/simple_list.dart';
+import 'dart:io';
+
+import 'package:exchange_emu_front/providers/menu_provider.dart';
+import 'package:exchange_emu_front/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/currencies_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,10 +17,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Widget? selectedWidget;
+    final menuProvider = Provider.of<MenuProvider>(context, listen: false);
+    final transactionProvider =
+        Provider.of<TransactionProvider>(context, listen: false);
+
+    Widget? selectedWidget = menuProvider.widget;
     final size = MediaQuery.of(context).size;
-    String titulo = "ff";
+    String titulo = menuProvider.nombreMenu;
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Center(
@@ -41,41 +52,119 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: ListView(
-        children: [
-          Container(
-            width: size.width,
-            height: size.height * 0.8,
-            color: Color.fromARGB(255, 0, 0, 0),
-            child: SimpleCurrencyList(),
-          ),
-          Container(
-            width: size.width,
-            height: size.height * 0.1,
-            color: Colors.cyan,
-            child: Row(
-              children: [
-                Container(
-                  width: size.width * 0.3,
-                  color: Colors.red,
-                ),
-                Container(
-                  width: size.width * 0.4,
-                  color: Colors.black,
-                ),
-                Container(
-                  width: size.width * 0.3,
-                  color: Colors.red,
-                ),
-              ],
+      body: ListView(children: [
+        Column(
+          children: [
+            Container(
+              width: size.width,
+              height: size.height * 0.80,
+              color: const Color.fromARGB(255, 0, 0, 0),
+              child: selectedWidget,
             ),
-          )
-        ],
-      ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            Container(
+              width: size.width,
+              height: size.height * 0.05,
+              decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
+                    )
+                  ],
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Row(children: [
+                SizedBox(
+                  width: size.width * 0.05,
+                ),
+                InkWell(
+                    child: Container(
+                        width: size.width * 0.2,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            image: const DecorationImage(
+                                image: AssetImage("assets/images/clock.png")),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20.5)),
+                            color: Colors.grey,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                                spreadRadius: 2,
+                                blurRadius: 2,
+                                offset: Offset(0, 0),
+                              )
+                            ])),
+                    onTap: () => setState(() {
+                          if (transactionProvider.transactions.isEmpty) {
+                            menuProvider.cambiarOpt(4);
+                            selectedWidget = menuProvider.widget;
+                          } else {
+                            menuProvider.cambiarOpt(3);
+                            selectedWidget = menuProvider.widget;
+                          }
+                        })),
+                SizedBox(
+                  width: size.width * 0.1,
+                ),
+                InkWell(
+                    child: Container(
+                        width: size.width * 0.3,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            image: const DecorationImage(
+                                image: AssetImage("assets/images/home.png")),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20.5)),
+                            color: Colors.grey,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                                spreadRadius: 2,
+                                blurRadius: 2,
+                                offset: Offset(0, 0),
+                              )
+                            ])),
+                    onTap: () => setState(() {
+                          menuProvider.cambiarOpt(1);
+                          selectedWidget = menuProvider.widget;
+                        })),
+                SizedBox(
+                  width: size.width * 0.1,
+                ),
+                InkWell(
+                    child: Container(
+                        width: size.width * 0.20,
+                        decoration: BoxDecoration(
+                            image: const DecorationImage(
+                              image: AssetImage("assets/images/wallet.png"),
+                            ),
+                            border: Border.all(color: Colors.black),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20.5)),
+                            color: Colors.grey,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                                spreadRadius: 2,
+                                blurRadius: 2,
+                                offset: Offset(0, 0),
+                              )
+                            ])),
+                    onTap: () => setState(() {
+                          menuProvider.cambiarOpt(2);
+                          selectedWidget = menuProvider.widget;
+                        }))
+              ]),
+            ),
+          ],
+        ),
+      ]),
     );
-  }
-
-  opcionHistorial() {
-    print("hola");
   }
 }
