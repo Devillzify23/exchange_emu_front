@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final cryptoList = cryptoListFromMap(jsonString);
-
 import 'dart:convert';
 
 import 'simple_crypto_model.dart';

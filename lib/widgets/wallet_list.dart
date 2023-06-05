@@ -13,7 +13,6 @@ class WalletListWidget extends StatelessWidget {
     final walletProvider = Provider.of<WalletProvider>(context, listen: true);
     final criptoProvider =
         Provider.of<CurrencyProvider>(context, listen: false);
-
     List<SimpleCrypto> criptos = criptoProvider.listacriptos;
     List<Wallet> wallets = walletProvider.wallets;
     return ListView.builder(

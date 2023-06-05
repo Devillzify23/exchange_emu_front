@@ -1,8 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:exchange_emu_front/models/big_transaction.dart';
-import 'package:exchange_emu_front/models/transaction_send.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../models/models.dart';
@@ -17,6 +14,8 @@ class TransactionProvider extends ChangeNotifier {
   }
 
   Future<void> getTransactions() async {
+    print("transacciones nuevas");
+    transactions.clear();
     var url = Uri.http(Preferences.ip, 'transactions/${Preferences.idUser}');
     final response = await http.get(url);
     String result = "{\"BigTransaction\":${response.body}}";

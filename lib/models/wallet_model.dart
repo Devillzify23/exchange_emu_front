@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final wallet = walletFromMap(jsonString);
-
 import 'dart:convert';
 
 class Wallet {

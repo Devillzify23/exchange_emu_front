@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/currencies_provider.dart';
+import '../providers/user_provider.dart';
+import '../providers/wallets_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,6 +22,8 @@ class _HomePageState extends State<HomePage> {
     final menuProvider = Provider.of<MenuProvider>(context, listen: false);
     final transactionProvider =
         Provider.of<TransactionProvider>(context, listen: false);
+    final walletProvider = Provider.of<WalletProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     Widget? selectedWidget = menuProvider.widget;
     final size = MediaQuery.of(context).size;
@@ -106,6 +110,7 @@ class _HomePageState extends State<HomePage> {
                             selectedWidget = menuProvider.widget;
                           } else {
                             menuProvider.cambiarOpt(3);
+                            transactionProvider.getTransactions();
                             selectedWidget = menuProvider.widget;
                           }
                         })),
@@ -158,6 +163,7 @@ class _HomePageState extends State<HomePage> {
                             ])),
                     onTap: () => setState(() {
                           menuProvider.cambiarOpt(2);
+                          walletProvider.getWallets();
                           selectedWidget = menuProvider.widget;
                         }))
               ]),

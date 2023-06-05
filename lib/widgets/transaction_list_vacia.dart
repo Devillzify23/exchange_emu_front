@@ -1,6 +1,4 @@
-import 'package:exchange_emu_front/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TransactionListVacia extends StatelessWidget {
   const TransactionListVacia({super.key});
@@ -8,8 +6,7 @@ class TransactionListVacia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final transactionProvider =
-        Provider.of<TransactionProvider>(context, listen: true);
+
     return Container(
       decoration: BoxDecoration(
           border: Border.all(color: Colors.black),

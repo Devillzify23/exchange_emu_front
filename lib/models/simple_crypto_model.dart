@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final simpleCrypto = simpleCryptoFromMap(jsonString);
-
 import 'dart:convert';
 
 class SimpleCrypto {

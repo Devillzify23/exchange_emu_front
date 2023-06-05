@@ -47,10 +47,9 @@ class Myapp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const Login(),
-        '/user': (context) => const UserDetails(),
         '/register': (context) => const RegisterPage(),
         '/home': (context) => const HomePage(),
-        '/crypto': (context) => FullCryptoPage(),
+        '/crypto': (context) => const FullCryptoPage(),
       },
       theme: ThemeData(
           appBarTheme: AppBarTheme.lerp(

@@ -26,8 +26,6 @@ class _OperationState extends State<Operation> {
   Widget build(BuildContext context) {
     final transactionProvider =
         Provider.of<TransactionProvider>(context, listen: false);
-    final walletProvider = Provider.of<WalletProvider>(context, listen: false);
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     return AlertDialog(
       title: Text('Cantidad a ${verOpeacion()}'),
@@ -52,23 +50,18 @@ class _OperationState extends State<Operation> {
           child: Text('Cancelar'),
         ),
         ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             if (_formKey.currentState!.validate()) {
               enteredNumber = double.tryParse(_numberController.text)!;
-              print(enteredNumber);
               transactionProvider.newOperation(TransactionLite(
                   idUser: Preferences.idUser,
                   symbol: Preferences.symbol,
                   amount: enteredNumber,
                   opType: Preferences.optype));
-
-              userProvider.getUser(Preferences.cuenta, Preferences.contra);
-              walletProvider.getWallets();
-              transactionProvider.getTransactions();
               Navigator.pop(context);
             }
           },
-          child: Text('Aceptar'),
+          child: const Text('Aceptar'),
         ),
       ],
     );

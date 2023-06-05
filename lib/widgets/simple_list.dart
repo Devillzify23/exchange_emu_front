@@ -1,16 +1,26 @@
+import 'dart:async';
+
 import 'package:exchange_emu_front/providers/currencies_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../preferences/shared_preferences.dart';
 
-class SimpleCurrencyList extends StatelessWidget {
+class SimpleCurrencyList extends StatefulWidget {
   const SimpleCurrencyList({super.key});
 
+  @override
+  State<SimpleCurrencyList> createState() => _SimpleCurrencyListState();
+}
+
+class _SimpleCurrencyListState extends State<SimpleCurrencyList> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final criptolist = Provider.of<CurrencyProvider>(context, listen: true);
+    Timer.periodic(Duration(seconds: 5), (timer) {
+      criptolist.getCryptos();
+    });
     return ListView.builder(
       itemCount:
           criptolist.listacriptos.length, // Número de elementos en la lista

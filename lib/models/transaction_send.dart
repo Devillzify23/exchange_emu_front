@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final transaction = transactionFromMap(jsonString);
-
 import 'dart:convert';
 
 class TransactionLite {

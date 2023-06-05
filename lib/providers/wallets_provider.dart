@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:exchange_emu_front/models/wallet_list_model.dart';
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 import '../preferences/shared_preferences.dart';
@@ -15,6 +13,8 @@ class WalletProvider extends ChangeNotifier {
   }
 
   Future<void> getWallets() async {
+    print("se vuelve a limpiar la lista");
+    wallets.clear();
     var url = Uri.http(Preferences.ip, 'wallets/${Preferences.idUser}');
     final response = await http.get(url);
     String result = "{\"WalletList\":${response.body}}";

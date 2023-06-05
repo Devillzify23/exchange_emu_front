@@ -1,11 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
-
-import 'package:exchange_emu_front/models/models.dart';
-import 'package:exchange_emu_front/models/simple_crypto_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/models.dart';
 import '../preferences/shared_preferences.dart';
 
 class CurrencyProvider extends ChangeNotifier {
@@ -23,6 +20,7 @@ class CurrencyProvider extends ChangeNotifier {
     getCryptos();
   }
   Future<void> getCryptos() async {
+    listacriptos.clear();
     var url = Uri.http(Preferences.ip, 'prices');
     final response = await http.get(url);
     cripto = CryptoList.fromMap(jsonDecode(response.body));
