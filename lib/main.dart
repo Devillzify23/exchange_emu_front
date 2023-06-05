@@ -1,5 +1,3 @@
-import 'package:exchange_emu_front/pages/fullcrypto.dart';
-import 'package:exchange_emu_front/pages/home_page.dart';
 import 'package:exchange_emu_front/pages/pages.dart';
 import 'package:exchange_emu_front/providers/currencies_provider.dart';
 import 'package:exchange_emu_front/providers/menu_provider.dart';
@@ -31,7 +29,6 @@ void main() async {
 
 class Myapp extends StatelessWidget {
   const Myapp({super.key});
-
   @override
   Widget build(BuildContext context) {
     String page = '';
@@ -49,7 +46,7 @@ class Myapp extends StatelessWidget {
         '/': (context) => const Login(),
         '/register': (context) => const RegisterPage(),
         '/home': (context) => const HomePage(),
-        '/crypto': (context) => const FullCryptoPage(),
+        '/crypto': (context) => FullCryptoPage(),
       },
       theme: ThemeData(
           appBarTheme: AppBarTheme.lerp(
