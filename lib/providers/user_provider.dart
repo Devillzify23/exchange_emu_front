@@ -18,11 +18,16 @@ class UserProvider extends ChangeNotifier {
     var url = Uri.http(Preferences.ip, 'users/login/$cuenta/$contra');
     final response = await http.get(url);
     usuario = User.fromJson(response.body);
+    Preferences.idUser = usuario.id!;
+    Preferences.apodo = usuario.apodo!;
+    Preferences.logged = true;
+    Preferences.cuenta = usuario.cuenta!;
+    Preferences.contra = usuario.contra!;
     notifyListeners();
   }
 
   Future<void> registerNewUser(UserSend user) async {
-    var url = Uri.http('192.168.0.187:8080', 'users/register');
+    var url = Uri.http(Preferences.ip, 'users/register');
     final userJson = user.toJson();
     final response = await http.post(url,
         body: userJson, headers: {'Content-Type': 'application/json'});

@@ -35,7 +35,7 @@ class _RegisterFormState extends State<RegisterForm> {
           cuenta: _cuenta,
           contra: _contra,
           apodo: _apodo);
-
+      print(nuevoUser.toString());
       await userProvider.registerNewUser(nuevoUser);
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Usuario creado correctamente")));

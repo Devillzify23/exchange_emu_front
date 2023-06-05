@@ -1,4 +1,3 @@
-import 'package:exchange_emu_front/pages/fullcrypto.dart';
 import 'package:exchange_emu_front/providers/currencies_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,6 +54,7 @@ class SimpleCurrencyList extends StatelessWidget {
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 onTap: () {
+                  Preferences.symbol = criptolist.listacriptos[index].symbol;
                   criptolist
                       .getFullCrypto(criptolist.listacriptos[index].symbol);
                   Navigator.pushNamed(context, '/crypto');

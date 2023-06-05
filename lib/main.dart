@@ -47,8 +47,6 @@ class Myapp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => const Login(),
-        '/wallets': (context) => const Wallets(),
-        '/history': (context) => const History(),
         '/user': (context) => const UserDetails(),
         '/register': (context) => const RegisterPage(),
         '/home': (context) => const HomePage(),

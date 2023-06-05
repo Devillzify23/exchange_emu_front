@@ -1,8 +1,5 @@
 import 'package:exchange_emu_front/widgets/login_form.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../providers/user_provider.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});

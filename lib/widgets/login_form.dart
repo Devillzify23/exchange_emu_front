@@ -1,7 +1,6 @@
 import 'package:exchange_emu_front/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -24,9 +23,6 @@ class _LoginFormState extends State<LoginForm> {
     }
     if (_cuenta != '' && _contra != '') {
       if (userProvider.usuario.id != null) {
-        Preferences.idUser = userProvider.usuario.id!;
-        Preferences.apodo = userProvider.usuario.apodo!;
-        Preferences.logged = true;
         Navigator.pushNamed(context, '/home');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

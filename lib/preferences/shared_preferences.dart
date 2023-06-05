@@ -1,17 +1,18 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/models.dart';
+
 class Preferences {
   static late SharedPreferences _prefs;
 
   static int _idUser = 0;
-
   static String _apodo = "";
-
   static bool _logged = false;
-
-  static String _ip = '192.168.0.187:8080';
-
-  static String _symbol = "";
+  static String _ip = '192.168.1.76:8080';
+  static String _symbol = '';
+  static String _cuenta = "";
+  static String _contra = "";
+  static String _opType = "";
 
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();
@@ -60,5 +61,32 @@ class Preferences {
   static set symbol(String symbol) {
     _symbol = symbol;
     _prefs.setString('symbol', symbol);
+  }
+
+  static String get cuenta {
+    return _prefs.getString('cuenta') ?? _cuenta;
+  }
+
+  static set cuenta(String cuenta) {
+    _cuenta = cuenta;
+    _prefs.setString('cuenta', cuenta);
+  }
+
+  static String get contra {
+    return _prefs.getString('contra') ?? _contra;
+  }
+
+  static set contra(String contra) {
+    _contra = contra;
+    _prefs.setString('contra', contra);
+  }
+
+  static String get optype {
+    return _prefs.getString('optype') ?? _opType;
+  }
+
+  static set optype(String optype) {
+    _opType = optype;
+    _prefs.setString('optype', optype);
   }
 }
