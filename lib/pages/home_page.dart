@@ -5,6 +5,7 @@ import 'package:exchange_emu_front/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../preferences/shared_preferences.dart';
 import '../providers/currencies_provider.dart';
 import '../providers/user_provider.dart';
 import '../providers/wallets_provider.dart';
@@ -24,6 +25,8 @@ class _HomePageState extends State<HomePage> {
         Provider.of<TransactionProvider>(context, listen: false);
     final walletProvider = Provider.of<WalletProvider>(context, listen: false);
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+    TextStyle estilo =
+        const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
     Widget? selectedWidget = menuProvider.widget;
     final size = MediaQuery.of(context).size;
@@ -45,7 +48,82 @@ class _HomePageState extends State<HomePage> {
           IconButton(
               iconSize: 50,
               onPressed: () {
-                print('Hola');
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        backgroundColor: Colors.black,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          height: size.height * 0.5,
+                          width: size.width * 0.5,
+                          child: Column(children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                              ),
+                              height: size.height * 0.1,
+                              child: Center(
+                                child: Text(
+                                  "Datos de usuario",
+                                  style: estilo,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                              ),
+                              height: size.height * 0.1,
+                              child: Center(
+                                child: Text(
+                                  Preferences.apodo,
+                                  style: estilo,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                              ),
+                              height: size.height * 0.1,
+                              child: Center(
+                                child: Text(
+                                  "Saldo: ${Preferences.saldo} €",
+                                  style: estilo,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: size.height * 0.05),
+                            InkWell(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  color: Colors.red,
+                                  border: Border.all(color: Colors.black),
+                                ),
+                                height: size.height * 0.1,
+                                width: size.width * 0.5,
+                                child: Center(
+                                  child: Text(
+                                    "Log Out",
+                                    style: estilo,
+                                  ),
+                                ),
+                              ),
+                              onTap: () {
+                                Preferences.logged = false;
+                                Navigator.pushNamed(context, '/');
+                              },
+                            )
+                          ]),
+                        ),
+                      );
+                    });
               },
               icon: const CircleAvatar(
                 backgroundImage: AssetImage('assets/images/user.png'),
@@ -105,12 +183,9 @@ class _HomePageState extends State<HomePage> {
                               )
                             ])),
                     onTap: () => setState(() {
-                          if (transactionProvider.transactions.isEmpty) {
-                            menuProvider.cambiarOpt(4);
-                            selectedWidget = menuProvider.widget;
-                          } else {
+                          transactionProvider.getTransactions();
+                          {
                             menuProvider.cambiarOpt(3);
-                            transactionProvider.getTransactions();
                             selectedWidget = menuProvider.widget;
                           }
                         })),

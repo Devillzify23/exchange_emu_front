@@ -7,6 +7,7 @@ class Login extends StatelessWidget {
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Center(
             child: Text(
           "ExchangeEmu",
