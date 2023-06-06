@@ -117,6 +117,20 @@ class _OperationState extends State<Operation> {
                         amount: enteredNumber,
                         opType: Preferences.optype),
                     context);
+                if (Preferences.optype == 'C') {
+                  print("entra en compra");
+                  Preferences.saldo = Preferences.saldo -
+                      double.parse((enteredNumber * Preferences.lastPrice)
+                          .toStringAsFixed(2));
+                }
+
+                if (Preferences.optype == 'V') {
+                  print("entra en venta");
+                  Preferences.saldo = Preferences.saldo +
+                      double.parse((enteredNumber * Preferences.lastPrice)
+                          .toStringAsFixed(2));
+                }
+
                 Navigator.pop(context);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -139,10 +153,15 @@ class _OperationState extends State<Operation> {
   }
 
   String calcularResultado() {
+    String saldo = "";
     if (Preferences.optype == 'C') {
-      return "Saldo restante: ${(Preferences.saldo - (enteredNumber * Preferences.lastPrice)).toStringAsFixed(2)} €";
-    } else {
-      return "Saldo restante: ${(Preferences.saldo + (enteredNumber * Preferences.lastPrice)).toStringAsFixed(2)} €";
+      saldo =
+          "Saldo restante: ${(Preferences.saldo - (enteredNumber * Preferences.lastPrice)).toStringAsFixed(2)} €";
     }
+    if (Preferences.optype == 'V') {
+      saldo =
+          "Saldo restante: ${(Preferences.saldo + (enteredNumber * Preferences.lastPrice)).toStringAsFixed(2)} €";
+    }
+    return saldo;
   }
 }
