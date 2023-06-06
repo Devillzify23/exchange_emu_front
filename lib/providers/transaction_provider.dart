@@ -26,15 +26,12 @@ class TransactionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> newOperation(TransactionLite lite) async {
+  Future<void> newOperation(TransactionLite lite, BuildContext context) async {
     print("enviando operacion");
     var url = Uri.http(Preferences.ip, 'transactions/operation');
     final transaction = lite.toJson();
-    print("Transaction");
-    print(transaction);
     final response = await http.post(url,
         body: transaction, headers: {'Content-Type': 'application/json'});
-    print(response.body);
     notifyListeners();
   }
 }

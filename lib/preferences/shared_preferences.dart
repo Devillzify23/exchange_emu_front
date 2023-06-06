@@ -6,11 +6,13 @@ class Preferences {
   static int _idUser = 0;
   static String _apodo = "";
   static bool _logged = false;
-  static String _ip = '192.168.0.187:8080';
+  static String _ip = '192.168.1.76:8080';
   static String _symbol = '';
   static String _cuenta = "";
   static String _contra = "";
   static String _opType = "";
+  static double _lastPrice = 0.0;
+  static double _saldoRestante = 0.0;
 
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();
@@ -86,5 +88,23 @@ class Preferences {
   static set optype(String optype) {
     _opType = optype;
     _prefs.setString('optype', optype);
+  }
+
+  static double get lastPrice {
+    return _prefs.getDouble("lastPrice") ?? _lastPrice;
+  }
+
+  static set lastPrice(double lastPrice) {
+    _lastPrice = lastPrice;
+    _prefs.setDouble('lastPrice', lastPrice);
+  }
+
+  static double get saldo {
+    return _prefs.getDouble("saldoRestante") ?? _saldoRestante;
+  }
+
+  static set saldo(double saldo) {
+    _saldoRestante = saldo;
+    _prefs.setDouble('saldoRestante', saldo);
   }
 }

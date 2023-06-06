@@ -23,6 +23,7 @@ class UserProvider extends ChangeNotifier {
     Preferences.logged = true;
     Preferences.cuenta = usuario.cuenta!;
     Preferences.contra = usuario.contra!;
+    Preferences.saldo = usuario.saldo!;
     notifyListeners();
   }
 
@@ -33,5 +34,6 @@ class UserProvider extends ChangeNotifier {
         body: userJson, headers: {'Content-Type': 'application/json'});
     usuario = User.fromJson(response.body);
     notifyListeners();
+    print(response.body);
   }
 }
