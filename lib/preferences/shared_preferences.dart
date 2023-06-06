@@ -6,7 +6,7 @@ class Preferences {
   static int _idUser = 0;
   static String _apodo = "";
   static bool _logged = false;
-  static String _ip = '192.168.1.76:8080';
+  static String _ip = '192.168.0.187:8080';
   static String _symbol = '';
   static String _cuenta = "";
   static String _contra = "";
