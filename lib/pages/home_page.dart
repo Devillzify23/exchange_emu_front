@@ -1,12 +1,10 @@
-import 'dart:io';
-
 import 'package:exchange_emu_front/providers/menu_provider.dart';
 import 'package:exchange_emu_front/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../preferences/shared_preferences.dart';
-import '../providers/currencies_provider.dart';
+
 import '../providers/user_provider.dart';
 import '../providers/wallets_provider.dart';
 

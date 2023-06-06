@@ -79,7 +79,7 @@ class _FullCryptoPageState extends State<FullCryptoPage> {
             height: size.height * 0.5,
             child: Center(
                 child: Text(
-              criptolist.fullcrypto.description,
+              criptolist.fullcrypto.description.replaceAll(' ', ' '),
               textAlign: TextAlign.center,
               style: estilo,
             )),
@@ -148,7 +148,7 @@ class _FullCryptoPageState extends State<FullCryptoPage> {
                 ),
                 child: Center(
                   child: Text(
-                    "Max Supply: ${criptolist.fullcrypto.pricing.priceChange} %",
+                    "Price Change: ${criptolist.fullcrypto.pricing.priceChange} %",
                     style: estilo,
                   ),
                 ),
