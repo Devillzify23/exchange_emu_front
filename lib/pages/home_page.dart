@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                               height: size.height * 0.1,
                               child: Center(
                                 child: Text(
-                                  "Saldo: ${Preferences.saldo} €",
+                                  "Saldo: ${(Preferences.saldo).toStringAsFixed(2)} €",
                                   style: estilo,
                                 ),
                               ),
