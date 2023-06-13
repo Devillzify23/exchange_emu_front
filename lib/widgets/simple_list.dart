@@ -18,7 +18,7 @@ class _SimpleCurrencyListState extends State<SimpleCurrencyList> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final criptolist = Provider.of<CurrencyProvider>(context, listen: true);
-    Timer.periodic(Duration(seconds: 15), (timer) {
+    Timer.periodic(Duration(seconds: 60), (timer) {
       criptolist.getCryptos();
     });
     return ListView.builder(

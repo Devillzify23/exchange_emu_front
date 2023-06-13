@@ -117,19 +117,6 @@ class _OperationState extends State<Operation> {
                         amount: enteredNumber,
                         opType: Preferences.optype),
                     context);
-                if (Preferences.optype == 'C') {
-                  print("entra en compra");
-                  Preferences.saldo = Preferences.saldo -
-                      double.parse((enteredNumber * Preferences.lastPrice)
-                          .toStringAsFixed(2));
-                }
-
-                if (Preferences.optype == 'V') {
-                  print("entra en venta");
-                  Preferences.saldo = Preferences.saldo +
-                      double.parse((enteredNumber * Preferences.lastPrice)
-                          .toStringAsFixed(2));
-                }
 
                 Navigator.pop(context);
               } else {

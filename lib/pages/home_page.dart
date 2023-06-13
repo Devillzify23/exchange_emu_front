@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     final transactionProvider =
         Provider.of<TransactionProvider>(context, listen: false);
     final walletProvider = Provider.of<WalletProvider>(context, listen: false);
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: true);
     TextStyle estilo =
         const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
@@ -45,7 +45,9 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               iconSize: 50,
-              onPressed: () {
+              onPressed: () async {
+                await userProvider.getUser(
+                    Preferences.cuenta, Preferences.contra);
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -90,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                               height: size.height * 0.1,
                               child: Center(
                                 child: Text(
-                                  "Saldo: ${(Preferences.saldo).toStringAsFixed(2)} €",
+                                  "Saldo: ${userProvider.usuario.saldo} €",
                                   style: estilo,
                                 ),
                               ),
